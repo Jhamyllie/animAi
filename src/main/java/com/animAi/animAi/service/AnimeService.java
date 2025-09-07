@@ -34,4 +34,15 @@ public class AnimeService {
         Anime salvo = repository.save(anime);
         return ResponseEntity.status(201).body(salvo);
     }
+
+    // Atualizar anime existente
+    public ResponseEntity<Anime> atualizar(Long id, Anime anime) {
+        return repository.findById(id).map(existente -> {
+            existente.setNome(anime.getNome());
+            existente.setGenero(anime.getGenero());
+            existente.setEpisodios(anime.getEpisodios());
+            repository.save(existente);
+            return ResponseEntity.ok(existente);
+        }).orElse(ResponseEntity.notFound().build());
+    }
 }

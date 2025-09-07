@@ -35,4 +35,10 @@ public class AnimeController {
     public ResponseEntity<Anime> criar(@Valid @RequestBody Anime anime) {
         return service.criar(anime);
     }
+
+    // Atualizar anime existente
+    @PutMapping("/{id}")
+    public ResponseEntity<Anime> atualizar(@PathVariable Long id, @Valid @RequestBody Anime anime) {
+        return service.atualizar(id, anime);
+    }
 }
