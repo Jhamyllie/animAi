@@ -17,9 +17,9 @@ public class AnimeService {
         this.repository = repository;
     }
 
-    // Listar todos
+    // Lista todos os animes
     public List<Anime> listar() {
-        return repository.findAll();
+        return repository.findAllByOrderByIdAsc();
     }
 
     // Busca um anime pelo seu ID
@@ -35,7 +35,7 @@ public class AnimeService {
         return ResponseEntity.status(201).body(salvo);
     }
 
-    // Atualizar anime existente
+
     public ResponseEntity<Anime> atualizar(Long id, Anime anime) {
         return repository.findById(id).map(existente -> {
             existente.setNome(anime.getNome());
@@ -45,6 +45,7 @@ public class AnimeService {
             return ResponseEntity.ok(existente);
         }).orElse(ResponseEntity.notFound().build());
     }
+
 
     // Deletar um anime por ID
     public ResponseEntity<Void> deletar(Long id) {
