@@ -22,4 +22,9 @@ public class AnimeController {
     public List<Anime> listar() {
         return service.listar();
     }
+
+    @PostMapping
+    public ResponseEntity<Anime> criar(@Valid @RequestBody Anime anime) {
+        return service.criar(anime);
+    }
 }

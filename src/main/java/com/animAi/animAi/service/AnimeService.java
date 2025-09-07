@@ -21,4 +21,10 @@ public class AnimeService {
     public List<Anime> listar() {
         return repository.findAll();
     }
+
+    // Cadastrar um novo anime
+    public ResponseEntity<Anime> criar(Anime anime) {
+        Anime salvo = repository.save(anime);
+        return ResponseEntity.status(201).body(salvo);
+    }
 }
