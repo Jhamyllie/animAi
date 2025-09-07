@@ -18,11 +18,19 @@ public class AnimeController {
         this.service = service;
     }
 
+    // Busca todos
     @GetMapping
     public List<Anime> listar() {
         return service.listar();
     }
 
+    // Busca um anime pelo seu ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Anime> buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id);
+    }
+
+    // Cadastrar um novo anime
     @PostMapping
     public ResponseEntity<Anime> criar(@Valid @RequestBody Anime anime) {
         return service.criar(anime);

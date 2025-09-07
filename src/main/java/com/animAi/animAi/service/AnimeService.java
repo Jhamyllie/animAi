@@ -22,6 +22,13 @@ public class AnimeService {
         return repository.findAll();
     }
 
+    // Busca um anime pelo seu ID
+    public ResponseEntity<Anime> buscarPorId(Long id) {
+        return repository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     // Cadastrar um novo anime
     public ResponseEntity<Anime> criar(Anime anime) {
         Anime salvo = repository.save(anime);
