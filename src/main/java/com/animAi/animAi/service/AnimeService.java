@@ -45,4 +45,12 @@ public class AnimeService {
             return ResponseEntity.ok(existente);
         }).orElse(ResponseEntity.notFound().build());
     }
+
+    // Deletar um anime por ID
+    public ResponseEntity<Void> deletar(Long id) {
+        return repository.findById(id).map(existente -> {
+            repository.delete(existente);
+            return ResponseEntity.noContent().<Void>build();
+        }).orElse(ResponseEntity.notFound().build());
+    }
 }

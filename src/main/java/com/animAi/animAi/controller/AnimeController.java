@@ -41,4 +41,10 @@ public class AnimeController {
     public ResponseEntity<Anime> atualizar(@PathVariable Long id, @Valid @RequestBody Anime anime) {
         return service.atualizar(id, anime);
     }
+
+    // Deletar um anime por ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        return service.deletar(id);
+    }
 }
