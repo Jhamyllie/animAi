@@ -1,129 +1,154 @@
 # AnimAi <img src="https://github.com/Jhamyllie/animAi/raw/main/src/main/assets/download%20(9).jpeg" alt="emoji" width="30"/>
 
 
-API REST desenvolvida em **Java + Spring Boot** para catalogar e gerenciar animes favoritos.  
-Permite realizar operações de **CRUD** (Create, Read, Update, Delete) em animes, com persistência em banco de dados.
+API REST desenvolvida em **Java** e **Spring Boot** para gerenciamento de animes favoritos.
+
+O projeto permite realizar operações completas de **CRUD (Create, Read, Update e Delete)** com persistência em banco de dados relacional, seguindo uma arquitetura organizada em camadas (**Controller, Service e Repository**).
 
 ---
 
-## 📌 Funcionalidades
+## 🚀 Funcionalidades
 
-- **Listar** todos os animes
-- **Buscar** anime por ID
-- **Criar** um novo anime
-- **Atualizar** anime existente
-- **Deletar** anime por ID
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-- **Java 21**
-- **Spring Boot 3.5.5**
-    - Spring Web
-    - Spring Data JPA
-    - Validation
-- **Lombok**
-- **Banco de dados**
-    - H2 Database (para testes em memória)
-    - PostgreSQL (produção/desenvolvimento)
+- 📋 Listar todos os animes
+- 🔍 Buscar anime por ID
+- ➕ Cadastrar novos animes
+- ✏️ Atualizar informações de um anime
+- 🗑️ Remover animes do catálogo
+- 💾 Persistência em banco de dados
 
 ---
 
+## 🛠️ Tecnologias utilizadas
 
-## Estrutura de Pastas
+- Java 21
+- Spring Boot 3.5
+- Spring Web
+- Spring Data JPA
+- Bean Validation
+- Lombok
+- PostgreSQL
+- H2 Database
+- Maven
 
-```bash
+---
+
+## 🏗️ Arquitetura
+
+O projeto segue uma arquitetura em camadas para facilitar a manutenção e organização do código.
+
+```
+src
+├── controller
+├── service
+├── repository
+├── model
+└── resources
+```
+
+Cada camada possui uma responsabilidade específica:
+
+- **Controller:** recebe as requisições HTTP.
+- **Service:** contém as regras de negócio.
+- **Repository:** comunicação com o banco de dados.
+- **Model:** entidades da aplicação.
+
+---
+
+## 📁 Estrutura do projeto
+
+```
 animAi
-├── .idea
-├── .mvn
 ├── src
 │   ├── main
 │   │   ├── java
-│   │   │   └── com
-│   │   │       └── animAi
-│   │   │           └── animAi
-│   │   │               ├── controller
-│   │   │               ├── model
-│   │   │               ├── repository
-│   │   │               ├── service
-│   │   │               └── AnimAiApplication.java
 │   │   └── resources
-│   │       ├── static
-│   │       ├── templates
-│   │       └── application.properties
 │   └── test
-├── target
-├── .env
-├── .env.example
-├── .gitattributes
-├── .gitignore
-├── HELP.md
+├── pom.xml
 ├── mvnw
-├── mvnw.cmd
-└── pom.xml
+└── README.md
 ```
-
-## Pré-requisitos
-
-Antes de rodar o projeto, certifique-se de ter instalado:
-
-- [Java 21+](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
-- [Maven](https://maven.apache.org/install.html)
-- [PostgreSQL](https://www.postgresql.org/download/) (se não quiser usar H2 em memória)
-- [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) ou [VS Code](https://code.visualstudio.com/) com extensão Java
 
 ---
 
-## 🚀 Como Rodar o Projeto
+## ▶️ Como executar o projeto
 
-### 1. Clonar o repositório
+### 1. Clone o repositório
+
 ```bash
-git clone https://github.com/seu-usuario/animAi.git
+git clone https://github.com/Jhamyllie/animAi.git
+```
+
+Entre na pasta:
+
+```bash
 cd animAi
 ```
-### 2. Configurar o banco de dados
 
-- **Usando PostgreSQL**
+---
 
-No arquivo application.properties, configure suas credenciais:
+### 2. Configure o banco de dados
 
-```
+#### PostgreSQL
+
+Configure o arquivo `application.properties`:
+
+```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/animAi
 spring.datasource.username=seu_usuario
 spring.datasource.password=sua_senha
+
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-- **Usando H2 (memória)**
+#### H2 Database
 
-Basta descomentar as linhas já configuradas no application.properties.
+Caso prefira utilizar o banco em memória, basta utilizar a configuração já disponível no projeto.
 
-O console do H2 estará em:
+Console H2:
+
+```
 http://localhost:8080/h2-console
+```
 
-### 3. Rodar a aplicação
+---
 
-- No terminal:
+### 3. Execute a aplicação
 
-``./mvnw spring-boot:run``
+Com Maven:
 
+```bash
+./mvnw spring-boot:run
+```
 
-Ou, no IntelliJ/VSCode, execute a classe `AnimAiApplication`.
+Ou execute a classe:
 
-## Endpoints da API
+```
+AnimAiApplication
+```
 
-Base URL: http://localhost:8080/animes
+---
 
-| Método | Endpoint       | Descrição                 |
-| ------ | -------------- | ------------------------- |
-| GET    | `/animes`      | Listar todos os animes    |
-| GET    | `/animes/{id}` | Buscar anime por ID       |
-| POST   | `/animes`      | Criar novo anime          |
-| PUT    | `/animes/{id}` | Atualizar anime existente |
-| DELETE | `/animes/{id}` | Deletar anime por ID      |
+## 📡 Endpoints
 
-### Exemplo de JSON para criação
+Base URL
+
+```
+http://localhost:8080/animes
+```
+
+| Método | Endpoint | Descrição |
+|---------|----------|-----------|
+| GET | /animes | Lista todos os animes |
+| GET | /animes/{id} | Busca um anime pelo ID |
+| POST | /animes | Cadastra um novo anime |
+| PUT | /animes/{id} | Atualiza um anime |
+| DELETE | /animes/{id} | Remove um anime |
+
+---
+
+## 📝 Exemplo de requisição
+
+### POST /animes
 
 ```json
 {
@@ -133,9 +158,36 @@ Base URL: http://localhost:8080/animes
 }
 ```
 
-## Implementações futuras
+---
 
-- Cadastro  de usuário
-- Autenticação
-- Integração com API externa
-- Construçao da interface do usuário(Frontedn)
+## 📚 Conceitos praticados
+
+Durante o desenvolvimento deste projeto foram praticados conceitos como:
+
+- Desenvolvimento de APIs REST;
+- Arquitetura em camadas;
+- CRUD completo;
+- Persistência de dados com Spring Data JPA;
+- Integração com PostgreSQL;
+- Banco em memória utilizando H2;
+- Validação de dados;
+- Organização de projetos Java com Spring Boot.
+
+---
+
+## 🚀 Melhorias futuras
+
+- Implementar autenticação com Spring Security;
+- Cadastro de usuários;
+- Documentação da API com Swagger/OpenAPI;
+- Integração com API pública de animes;
+- Desenvolvimento de uma interface web em React para consumir a API.
+
+---
+
+## 👩‍💻 Autora
+
+**Jamile Santana da Silva**
+
+- 💼 LinkedIn: https://www.linkedin.com/in/jamile-santana-da-silva
+- 💻 GitHub: https://github.com/Jhamyllie
